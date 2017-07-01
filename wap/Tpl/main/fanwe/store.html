@@ -1,0 +1,398 @@
+<?php
+$this->_var['pagecss'][] = $this->_var['TMPL_REAL']."/css/style.css";	
+$this->_var['pagecss'][] = $this->_var['TMPL_REAL']."/css/public.css";	
+$this->_var['pagecss'][] = $this->_var['TMPL_REAL']."/css/store.css";
+
+
+$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/utils/jquery-1.6.2.min.js";
+$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/utils/jquery.bgiframe.js";
+$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/utils/jquery.timer.js";
+$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/utils/jquery.weebox.js";
+$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/utils/jquery.touchwipe.js";
+
+$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/fanwe_utils/fanweUI.js";
+$this->_var['cpagejs'][] = $this->_var['TMPL_REAL']."/js/fanwe_utils/fanweUI.js";
+
+$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/script.js";
+$this->_var['cpagejs'][] = $this->_var['TMPL_REAL']."/js/script.js";
+$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/tuan_star.js";
+$this->_var['cpagejs'][] = $this->_var['TMPL_REAL']."/js/tuan_star.js";
+
+$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/deal.js";
+$this->_var['cpagejs'][] = $this->_var['TMPL_REAL']."/js/deal.js";
+
+$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/store.js";
+$this->_var['cpagejs'][] = $this->_var['TMPL_REAL']."/js/store.js";
+
+?>
+{include file="inc/no_header.html"}
+<header class="infopage-header store-header">
+    <div class="btn-box return"><a onclick="window.history.go(-1);"><i class="iconfont">&#xe6dc;</i></a></div>
+    <!--  
+    <div class="btn-box share"><a href="#"><i class="iconfont">&#xe6d7;</i></a></div>
+    <div class="btn-box collect"><a><i class="iconfont">&#xe6d8;</i></a></div>
+    <div class="btn-box collected"><a><i class="iconfont">&#xe6dd;</i></a></div>
+    -->
+	<h1>{$data.store_info.name}</h1>
+    <div class="header-bg"></div>
+</header>
+<div class="wrap">
+        <div class="content">	
+			<div class="banner">
+				<img src="{$data.store_info.preview_v1}" alt="">
+				<!-- 
+				<a href="#" class="img-sum">
+					<div class="flex-wrap">
+					<span class="font-pic">
+						<i class="iconfont">&#xe6d6;</i>
+					</span>
+					<span class="pic-sum-txt">270张</span>
+					</div>
+				</a>
+				-->
+			</div>
+			<!-- 头部图片 -->
+			<section class="split-line">
+				<div class="shop-title">
+					<h1>{$data.store_info.name}</h1>
+					<div class="stars-list">
+						<span class="shop-stars">
+  	 						<div class="score_left">
+	   	 						<span class="stars" data="{$data.store_info.avg_point}">
+	   	 							<i class="text-icon icon-star">&#xe67f;</i>
+	   	 							<i class="text-icon icon-star">&#xe67f;</i>
+	   	 							<i class="text-icon icon-star">&#xe67f;</i>
+	   	 							<i class="text-icon icon-star">&#xe67f;</i>
+	   	 							<i class="text-icon icon-star">&#xe67f;</i>
+	   	 						</span>
+   	 						</div>						</span>
+						<span class="star-text">{$data.store_info.avg_point}分</span>
+						{if $data.store_info.ref_avg_price > 0}
+						<span class="per-cost">人均: &yen;{$data.store_info.ref_avg_price}</span>
+						{/if}
+					</div>
+					<?php if(defined('IS_STORE_PAY')){ ?>
+					{if $data.store_info.open_store_payment}
+					<a href="{$data.store_pay_url}" class="buy-btn">优惠买单</a>
+					{/if}
+					<?php }?>
+				</div>
+			</section>
+			<section class="split-line">
+				<div class="shop-info">
+					<i class="place-ico iconfont">&#xe6de;</i>
+					<p class="shop-add">{$data.store_info.address}</p>
+					<a href="tel:{$data.store_info.tel}" class="shop-phone"><i class="iconfont">&#xe6da;</i></a>
+				</div>
+			</section>
+			<!-- 门店信息 -->
+			<ul class="act-list split-line-top split-line">
+				{if $data.store_info.open_store_payment}
+				<li class="split-line">
+					<div class="act-menu cut">
+						减
+					</div>
+					<h2 class="act-title">{$data.store_info.promote_str}</h2>
+				</li>
+				{/if}
+				
+				{foreach from="$data.event_list" item=el}
+				<li class="split-line">
+					<div class="act-menu active">
+						活
+					</div>
+				<a href="{$el.event_url}" class="act-title">
+					<h2>{$el.name}</h2>
+				</a>
+				<i class="iconfont">&#xe6d0;</i>
+				</li>
+				{/foreach}
+				
+				{foreach from="$data.youhui_list" item=yl}
+				<li class="split-line">
+					<div class="act-menu quan">
+						券
+					</div>
+					<a href="{$yl.youhui_url}" class="act-title">
+					<h2>{$yl.name}</h2>
+					</a>
+					<i class="iconfont">&#xe6d0;</i>
+				</li>
+				{/foreach}
+				
+				
+				
+				{if $data.tuan_list}
+				<dl class="act-info-list split-line">
+					<div class="act-info-menu tuan">
+						团
+					</div>
+					
+					{foreach from="$data.tuan_list" item="tl" key="tl_key"}
+					<dd class="split-line" {if $tl_key > 1 }style="display:none"{/if}>
+					<a class="info-list-info" href="{$tl.tuan_url}">
+						<div class="img-box">
+							<img src="{$tl.icon_v1}" alt="">
+						</div>
+						<div class="info-txt">
+							<h1>{if $tl.sub_name}{$tl.sub_name}{else}{$tl.name}{/if}</h1>
+							<p>{$tl.brief}</p>
+							<div class="price-info">
+								<span class="n-price">&yen;{$tl.buy_count}</span>
+								<del class="p-price">{$tl.current_price}</del>
+								<span class="sale-info">已售{$tl.origin_price}</span>
+							</div>
+						</div>
+					</a>
+					</dd>
+					{/foreach}
+					
+					{if $tl_key > 1 }
+					<div class="click-to-check split-line">
+						<span class="check-defaut">点击查看全部团购</span>
+						<span class="click-hide">收起</span> 
+						<i class="iconfont close_span">&#xe601;</i>
+					</div>
+					{/if}
+					
+				</dl>
+				
+				
+				{/if}
+				
+				
+				{if $data.deal_list}
+				<dl class="act-info-list split-line">
+					<div class="act-info-menu shang">
+						商
+					</div>
+					{foreach from="$data.deal_list" item="dl" key="dl_key"}
+					<dd class="split-line" {if $dl_key > 1 }style="display:none"{/if} >
+					<a class="info-list-info" href="{$dl.deal_url}">
+						<div class="img-box">
+							<img src="{$dl.icon_v1}" alt="">
+						</div>
+						<div class="info-txt">
+							<h1>{if $dl.sub_name}{$dl.sub_name}{else}{$dl.name}{/if}</h1>
+							<p>{$dl.brief}</p>
+							<div class="price-info">
+								<span class="n-price">&yen;{$dl.current_price}</span>
+								<del class="p-price">{$dl.origin_price}</del>
+								<span class="sale-info">已售{$dl.buy_count}</span>
+							</div>
+						</div>
+					</a>
+					</dd>
+					{/foreach}
+					
+					{if $dl_key > 1 }
+					<div class="click-to-check split-line">
+						<span class="check-defaut">点击查看全部商品</span>
+						<span class="click-hide">收起</span> 
+						<i class="iconfont close_span">&#xe601;</i>
+					</div>
+					{/if}
+					
+				</dl>
+				
+				
+				
+				{/if}
+				
+			</ul>
+			<!-- 活动列表 -->
+			
+			<!--  
+			<div class="split-line-top recom">
+				<h5 class="recom-title split-line">
+					推荐菜
+				</h5>
+				<ul class="recom-info">
+					<li>活虾</li>
+					<li>海蜇</li>
+					<li>烤虾</li>
+					<li>三文鱼</li>
+					<li>冰淇淋</li>
+					<li>鲨鱼</li>
+					<li>中华鲟</li>
+					<li>龙鱼</li>
+					<li>海蛎饼子</li>
+					<li>酸梅汁</li>
+					<li>泡椒田鸡王</li>
+					<li>生鱼片</li>
+					<li>海蛎</li>
+					<li>生鱼片</li>
+					<li>食人鲳</li>
+					<li>北海道帝王</li>
+					<li>虾蛄</li>
+					<li>西瓜汁</li>
+					<li>麻辣小龙虾</li>
+					<li>北极贝</li>
+					<li>蛋挞</li>
+					<li>牙签肉</li>
+					<li>北极贝</li>
+					<li>蛋挞</li>
+					<div class="clear"></div>
+				</ul>
+			</div>
+			-->
+			<!-- 推荐菜 -->
+			<div class="comment split-line-top split-line">
+				<div class="comment-point split-line">
+					<span class="pull-right">
+  	 						<div class="score_left">
+	   	 						<span class="stars" data="{$data.store_info.avg_point}">
+	   	 							<i class="text-icon icon-star">&#xe67f;</i>
+	   	 							<i class="text-icon icon-star">&#xe67f;</i>
+	   	 							<i class="text-icon icon-star">&#xe67f;</i>
+	   	 							<i class="text-icon icon-star">&#xe67f;</i>
+	   	 							<i class="text-icon icon-star">&#xe67f;</i>
+	   	 						</span>
+   	 						</div>
+   	 						<span class="star-text">{$data.store_info.avg_point}分</span>
+  	 						<div class="address_right">
+  	 							<span class="shop-add">{$data.store_info.dp_count}条评价</span>
+  	 						</div>
+					</span>
+				</div>
+				<!-- 
+				<ul class="comment-sum split-line">
+					<li><a href="#">种类很齐全 625</a></li>
+					<li><a href="#">味道很不错 515</a></li>
+					<li><a href="#">原料品质不错 515</a></li>
+					<li><a href="#">性价比 222</a></li>
+					<li><a href="#">环境不错 998</a></li>
+					<li><a href="#">很新鲜 542</a></li>
+					<li><a href="#">服务态度很好 632</a></li>
+					<li><a href="#">交通很方便 289</a></li>
+					<div class="clear"></div>
+				</ul>
+				 -->
+				{if $data.store_info.dp_count > 0}
+				<ul class="comment-info">
+					{foreach from="$data.dp_list" item="dpl"}
+					<li class="user-info split-line">
+						<a href="#">
+							<span class="pull-right">
+							<h3>{$dpl.user_name}</h3>
+  	 						<div class="score_left">
+	   	 						<span class="stars" data="{$dpl.point}">
+	   	 							<i class="text-icon icon-star">&#xe67f;</i>
+	   	 							<i class="text-icon icon-star">&#xe67f;</i>
+	   	 							<i class="text-icon icon-star">&#xe67f;</i>
+	   	 							<i class="text-icon icon-star">&#xe67f;</i>
+	   	 							<i class="text-icon icon-star">&#xe67f;</i>
+	   	 						</span>
+   	 						</div>
+  	 						<div class="address_right">
+  	 							<span class="shop-add">{$dpl.create_time}</span>
+  	 						</div>
+							</span>
+							<div class="user-com">
+								<p>{$dpl.content}</p>
+							</div>
+							{if $dpl.images_v1}
+							<ul class="com-pic">
+								{foreach from="$dpl.images_v1" item="dpl_img"}
+								<li>
+									<img src="{$dpl_img}" alt="">
+								</li>
+								{/foreach}
+								<div class="clear"></div>
+							</ul>
+							{/if}
+
+						</a>
+					</li>
+					{/foreach}
+					
+					
+					{if $data.store_info.dp_count > 5}
+					<dt>
+						<a href="{$data.dp_url}" class="click-to-check-all"><span>点击查看全部评价</span> <i class="iconfont">&#xe601;</i></a>
+					</dt>
+					{/if}
+				</ul>
+				{/if}
+			</div>
+			<!-- 点评列表 -->
+			
+			
+			<dl class="other-info split-line-top">
+				{if $data.store_info.open_time}
+				<dd class="split-line"><h5>其他信息</h5></dd>
+				<dd class="split-line"><p>营业时间:{$data.store_info.open_time}<!-- <span>免费Wifi</span> --></p></dd>
+				{/if}
+				 	{if $data.other_supplier_location}				 	
+				 	{foreach from="$data.other_supplier_location" item="osl" key="sl_key"}
+				 	 <div class="deal-locationo-list deal-locationo-list-set-display">
+	                    <section class="split-line">
+	                        <a href="{$osl.location_url}" class="shop-title">
+	                            <h5>{$osl.name}</h5>
+	                            <span>{$osl.distance}</span>
+	                        </a>
+	                    </section>
+	                    {if $osl.address neq '' || $osl.tel neq ''}
+	                    <section class="split-line">
+	                        <div class="shop-info">
+	                        	{if $osl.address}
+	                            <i class="place-ico iconfont">&#xe6de;</i>
+	                            <p class="shop-add">{$osl.address}</p>
+	                            {/if}
+	                            {if $osl.tel}
+	                            <a href="tel:{$osl.tel}" class="shop-phone"><i class="iconfont">&#xe6da;</i></a>
+	                            {/if}
+	                        </div>
+	                    </section>
+                        {/if}
+                    </div>
+                    {/foreach}
+				 	{if $data.other_supplier_location_count > 0}
+ 
+                    <div class="click-to-check split-line toggle-deal-location-list">
+						<span class="check-defaut clear-margin">查看其他分店（{$data.other_supplier_location_count}）</span>
+						<span class="click-hide">收起</span> 
+						<i class="iconfont close_span">&#xe601;</i>
+					</div>
+ 
+                    {/if}
+                    {/if}			 
+			</dl>
+			<!-- 其他信息 -->
+			
+			{if $data.location_list}
+			<ul class="recom-shop split-line-top">
+				<h5 class="split-line">推荐商家</h5>
+				{foreach from=$data.location_list item="ll"}
+				<li class="split-line">
+				<a href="{$ll.location_url}" class="recom-shop-info">
+					<div class="img-box">
+							<img src="{$ll.preview}" alt="">
+						</div>
+						<div class="info-txt">
+							<h1>{$ll.name}</h1>
+							<span class="pull-right">
+	  	 						<div class="score_left">
+		   	 						<span class="stars" data="{$ll.avg_point}">
+		   	 							<i class="text-icon icon-star"></i>
+		   	 							<i class="text-icon icon-star"></i>
+		   	 							<i class="text-icon icon-star"></i>
+		   	 							<i class="text-icon icon-star"></i>
+		   	 							<i class="text-icon icon-star"></i>
+		   	 						</span>
+	   	 						</div>
+	   	 						<span class="star-text">{$ll.avg_point}分</span>
+							</span>							
+							<div class="price-info">
+								<span class="p-price">{$ll.dealcate_name}</span>
+								<span class="sale-info">{$ll.area_name}{$ll.distance}</span>
+							</div>
+						</div>
+				</a>
+				</li>
+				{/foreach}
+			</ul>
+			{/if}
+        </div>
+</div>
+{include file="inc/no_footer.html"}	

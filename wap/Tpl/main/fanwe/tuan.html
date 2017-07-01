@@ -1,0 +1,172 @@
+<?php
+$this->_var['pagecss'][] = $this->_var['TMPL_REAL']."/css/style.css";	
+$this->_var['pagecss'][] = $this->_var['TMPL_REAL']."/css/color.css";	
+$this->_var['pagecss'][] = $this->_var['TMPL_REAL']."/css/public.css";	
+$this->_var['pagecss'][] = $this->_var['TMPL_REAL']."/css/tuan.css";	
+
+$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/utils/jquery-1.6.2.min.js";
+$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/utils/jquery.bgiframe.js";
+$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/utils/jquery.timer.js";
+$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/utils/jquery.weebox.js";
+$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/utils/jquery.touchwipe.js";
+
+$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/fanwe_utils/fanweUI.js";
+$this->_var['cpagejs'][] = $this->_var['TMPL_REAL']."/js/fanwe_utils/fanweUI.js";
+
+$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/script.js";
+$this->_var['cpagejs'][] = $this->_var['TMPL_REAL']."/js/script.js";
+
+$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/tuan_star.js";
+$this->_var['cpagejs'][] = $this->_var['TMPL_REAL']."/js/tuan_star.js";
+
+$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/nav_hide_list.js";
+$this->_var['cpagejs'][] = $this->_var['TMPL_REAL']."/js/nav_hide_list.js";
+
+?>
+{include file="inc/header.html"}
+
+
+<div class="wrap">
+	<div class="hide_list">
+		  <div class="abbr">
+		  	   <div class="first_list">
+		  	   	    <ul>
+						{foreach from=$data.bcate_list item=cate }
+						<li class="directory">{$cate.name}</li>
+						{/foreach}
+		  	   	    </ul>
+		  	   </div>
+			   <div class="second_list">
+			   	{foreach from=$data.bcate_list item=cate}
+			   	    <ul>
+						{foreach from=$cate.bcate_type item=blist}
+						<li class="two_directory"><a href="{$blist.url}">{$blist.name}</a></li>
+						{/foreach}
+		  	   	    </ul>
+					{/foreach}
+			   </div>
+		  </div>
+		  <div class="abbr">
+		  	   <div class="first_list">
+		  	   	    <ul>
+		  	   	    	
+						{foreach from=$data.quan_list item=quan key=key}
+						<li class="directory">{$quan.name}</li>
+						{/foreach}
+		  	   	    </ul>
+		  	   </div>
+			   <div class="second_list">
+			   	{foreach from=$data.quan_list item=quan }
+			   	    <ul>
+						{foreach from=$quan.quan_sub item=qlist}
+						<li class="two_directory"><a href="{$qlist.url}">{$qlist.name}</a></li>
+						{/foreach}
+						
+		  	   	    </ul>
+					{/foreach}
+			   </div>
+		  </div>
+		  <div class="abbr">
+		  	   <div class="first_list">
+		  	   	    <ul>
+						{foreach from=$data.navs item=navs}
+							<li class="directory"><a href="{$navs.url}">{$navs.name}</a></li>
+						{/foreach}
+					</ul>
+		  	   </div>
+		  </div>
+	</div>
+	<div class="main_list">
+		 	   <ul class="mall-cate">
+		 	   	   <li class=" split-line">
+		 	   	   	    <span>{if $request.catename}{$request.catename}{else}全部分类 {/if}</span>
+		 	   	   	    <i class="iconfont fa-sort-desc"></i>
+		 	   	   </li>
+				   <li class=" split-line">
+		 	   	   	<span>{if $request.quanname}{$request.quanname}{else}全城 {/if}</span>
+		 	   	   	<i class="iconfont fa-sort-desc"></i>
+		 	   	   </li>
+				   <li class=" split-line">
+		 	   	   	   <span>{if $request.ordername}{$request.ordername}{else}默认 {/if}</span>
+					  <i class="iconfont fa-sort-desc"></i>
+		 	   	   </li>
+		 	   </ul>
+	</div>
+	{if $geo}
+	<div class="geo_row"><i class="iconfont">&#xe611;</i>{$geo.address}</div>
+	{/if}
+	<div class="content back-white">
+		<div class="list-wrap">
+		
+			{foreach from=$data.item item=goods_list}
+			<dl class="shop split-line-top split-line goods-list-dl">
+				<dt class="shop-info split-line">
+					<h1>{$goods_list.0.location_name}</h1>
+					<div class="stars-list">
+						<span class="pull-right">
+  	 						<div class="score_left">
+	   	 						<span class="stars" data="{$goods_list.0.location_avg_point}">
+	   	 							<i class="text-icon icon-star">&#xe67f;</i>
+	   	 							<i class="text-icon icon-star">&#xe67f;</i>
+	   	 							<i class="text-icon icon-star">&#xe67f;</i>
+	   	 							<i class="text-icon icon-star">&#xe67f;</i>
+	   	 							<i class="text-icon icon-star">&#xe67f;</i>
+	   	 						</span>
+   	 						</div>
+   	 						<span class="star-text">{$goods_list.0.location_avg_point}分</span>
+  	 						<div class="address_right">
+  	 							<span class="shop-add">{$goods_list.0.area_name} {$goods_list.0.distance}</span>
+  	 						</div>
+						</span>
+					</div>
+				</dt>
+				{foreach from=$goods_list item=gl key=k}
+				 {if $k !== "count"}
+				
+				<dd class="shop-goods split-line">
+				 <a href="{$gl.url}">
+					<div class="img-box">
+						<img src="{$gl.icon}">
+					</div>
+					<div class="shop-goods-info">
+						<p class="info-title">{$gl.sub_name}</p>
+						<div class="price-info">
+							<span class="n-price">&yen;{$gl.current_price}</span>
+							<del class="p-price">{$gl.origin_price}</del>
+							<div class="act-box">
+							{if $gl.promotes_desc}
+							<span class="act-menu cut-5">{$gl.promotes_desc}</span>
+							{/if}
+							</div>
+							<span class="sale-info">已售{$gl.buy_count}</span>
+						</div>
+					</div>
+					</a>
+				</dd>
+				
+				{/if}
+				{/foreach}
+				
+				 {if $goods_list.count > 0}
+				<a class="click-to-check">
+					
+						<span class="check-defaut">查看其他{$goods_list.count}个团购</span>
+					 
+						<span class="click-hide">收起</span>
+					 
+						<i class="iconfont close_span">&#xe6c3;</i>
+				</a>
+				 {/if}
+				
+			</dl>
+			{/foreach}
+			 
+		</div>
+	</div>
+{if $pages}
+	<div class="fy">
+		{$pages}
+	</div>
+{/if}
+
+{include file="inc/footer_v1.html"}	
